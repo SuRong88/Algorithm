@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-11 09:48:58
- * @LastEditTime: 2021-06-18 17:43:42
+ * @LastEditTime: 2021-06-18 18:32:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Algorithm\leetcode题目\test.js
@@ -37,21 +37,32 @@ async function test() {
 
 function fn(nums) {
 	const result = [];
-	function backtrack(paths, n) {
+	// function backtrack(paths, n) {
+	// 	if (paths.length === n) {
+	// 		result.push(paths);
+	// 	} else {
+	// 		nums.forEach((num, numIndex) => {
+	// 			const last = paths[paths.length - 1];
+	// 			if (numIndex < nums.indexOf(last)) return;
+	// 			!paths.includes(num) && backtrack(paths.concat(num), n);
+	// 		});
+	// 	}
+	// }
+	// for (let n = 0; n <= nums.length; n++) {
+	// 	backtrack([], n);
+	// }
+	function backtrack(paths, n, start) {
 		if (paths.length === n) {
 			result.push(paths);
 		} else {
-			nums.forEach((num, numIndex) => {
-				const last = paths[paths.length - 1];
-				if (numIndex < nums.indexOf(last)) return;
-				!paths.includes(num) && backtrack(paths.concat(num), n);
-			});
+			for (let i = start; i < nums.length; i++) {
+				backtrack(paths.concat(nums[i]), n, i + 1);
+			}
 		}
 	}
 	for (let n = 0; n <= nums.length; n++) {
-		backtrack([], n);
+		backtrack([], n, 0);
 	}
 	return result;
 }
 console.log(fn([1, 2, 3]));
-console.log(fn([3, 2, 1]));
