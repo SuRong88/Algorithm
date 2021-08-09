@@ -1,12 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-06-09 15:30:44
- * @LastEditTime: 2021-06-15 11:55:25
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \菜鸟学算法\leetcode题目\treeMaxMinDepth.js
- */
-
 const tree = {
 	val: 1,
 	left: {
@@ -93,14 +84,23 @@ function maxDepthOfTree(root) {
 	let max = 0;
 	if (!root) return max;
 	const stack = [];
-	stack.unshift({ node: root, depth: 1 });
+	stack.unshift({
+		node: root,
+		depth: 1
+	});
 	while (stack.length) {
-		const current = stack.shift();
-		const node = current.node;
-		const depth = current.depth;
+		const { node, depth } = stack.shift();
 		max = Math.max(max, depth);
-		node.right && stack.unshift({ node: node.right, depth: depth + 1 });
-		node.left && stack.unshift({ node: node.left, depth: depth + 1 });
+		node.right &&
+			stack.unshift({
+				node: node.right,
+				depth: depth + 1
+			});
+		node.left &&
+			stack.unshift({
+				node: node.left,
+				depth: depth + 1
+			});
 	}
 	return max;
 }
@@ -109,17 +109,26 @@ function minDepthOfTree(root) {
 	let min = 0;
 	if (!root) return min;
 	const queue = [];
-	queue.push({ node: root, depth: 1 });
+	queue.push({
+		node: root,
+		depth: 1
+	});
 	while (queue.length) {
-		const current = queue.shift();
-		const node = current.node;
-		const depth = current.depth;
+		const { node, depth } = stack.shift();
 		if (!node.left && !node.right) {
 			min = depth;
 			break;
 		}
-		node.left && queue.push({ node: node.left, depth: depth + 1 });
-		node.right && queue.push({ node: node.right, depth: depth + 1 });
+		node.left &&
+			queue.push({
+				node: node.left,
+				depth: depth + 1
+			});
+		node.right &&
+			queue.push({
+				node: node.right,
+				depth: depth + 1
+			});
 	}
 	return min;
 }

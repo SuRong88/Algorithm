@@ -1,13 +1,5 @@
-/*
- * @Author: your name
- * @Date: 2021-06-16 09:29:12
- * @LastEditTime: 2021-06-17 15:11:56
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \Algorithm\排序\bubbleSort.js
- */
 function bubbleSort(arr) {
-	for (let i = 0; i < arr.length; i++) {
+	for (let i = 0; i < arr.length - 1; i++) {
 		for (let j = 0; j < arr.length - 1 - i; j++) {
 			if (arr[j] > arr[j + 1]) {
 				const temp = arr[j];
@@ -48,14 +40,12 @@ function insertionSort(arr) {
 }
 
 function quickSort(arr) {
-	if (arr.length === 0) return []; //关键
-	if (arr.length === 1) return arr;
-	// if (arr.length <= 1) return arr;
+	if (arr.length <= 1) return arr;
 
 	const leftArr = [];
 	const rightArr = [];
-
 	const mid = arr[0];
+	// 关键一步 必须从1开始 否则出现栈溢出
 	for (let i = 1; i < arr.length; i++) {
 		if (arr[i] < mid) {
 			leftArr.push(arr[i]);
@@ -70,7 +60,7 @@ function quickSort(arr) {
 }
 
 let arr = [135, 48, 143543, 4, 111, 444, 1435410, 1211, 584, 544, 7487687867];
-// console.log(bubbleSort(arr));
+console.log(bubbleSort(arr));
 
 // arr = [135, 48, 143543, 4, 111, 444, 1435410, 1211, 584, 544, 7487687867];
 // console.log(selectionSort(arr));
@@ -109,8 +99,8 @@ function mergeSort(arr) {
 
 function shellSort() {}
 
-arr = [49, 48, 37, 36, 35, 26, 24, 17, 12, 8];
-console.log(mergeSort(arr));
+// arr = [49, 48, 37, 36, 35, 26, 24, 17, 12, 8];
+// console.log(mergeSort(arr));
 
 // 总结：
 // 归并排序 和 快速排序 都是“分而治之”思想的体现

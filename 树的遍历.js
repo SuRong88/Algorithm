@@ -1,52 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-06-15 12:04:49
- * @LastEditTime: 2021-06-16 16:09:28
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \Algorithm\树的遍历.js
- */
-const tree = {
-	val: 1,
-	left: {
-		val: 2,
-		left: {
-			val: 3,
-			left: {
-				val: 5,
-				left: null,
-				right: null
-			},
-			right: null
-		},
-		right: {
-			val: 4,
-			left: null,
-			right: null
-		}
-	},
-	right: {
-		val: 6,
-		left: null,
-		right: {
-			val: 7,
-			left: null,
-			right: {
-				val: 8,
-				left: null,
-				right: {
-					val: 9,
-					left: null,
-					right: {
-						val: 10,
-						left: null,
-						right: null
-					}
-				}
-			}
-		}
-	}
-};
 // 先序遍历  根 左 右
 function preOrderTraversal(root) {
 	const result = [];
@@ -92,7 +43,7 @@ function postOrderTraversal(root) {
 
 	return result;
 }
-// 层序遍历
+// 层序遍历（类似于广度优先遍历） 第一层 第二层 第三层依次遍历
 function levelOrderTraversal(root) {
 	const result = [];
 	if (!root) return result;
@@ -107,7 +58,65 @@ function levelOrderTraversal(root) {
 
 	return result;
 }
-// console.log("先序遍历：", preOrderTraversal(tree));
-// console.log("中序遍历：", midOrderTraversal(tree));
-// console.log("后序遍历：", postOrderTraversal(tree));
-// console.log("层序遍历：", levelOrderTraversal(tree));
+// 测试
+const tree = {
+	val: 1,
+	left: {
+		val: 2,
+		left: {
+			val: 3,
+			left: {
+				val: 5,
+				left: null,
+				right: null
+			},
+			right: null
+		},
+		right: {
+			val: 4,
+			left: null,
+			right: null
+		}
+	},
+	right: {
+		val: 6,
+		left: null,
+		right: {
+			val: 7,
+			left: null,
+			right: {
+				val: 8,
+				left: null,
+				right: {
+					val: 9,
+					left: null,
+					right: {
+						val: 10,
+						left: null,
+						right: null
+					}
+				}
+			}
+		}
+	}
+};
+console.log("先序遍历：", preOrderTraversal(tree));
+console.log("中序遍历：", midOrderTraversal(tree));
+console.log("后序遍历：", postOrderTraversal(tree));
+console.log("层序遍历：", levelOrderTraversal(tree));
+// 先序遍历： [
+// 	1, 2, 3, 5,  4,
+// 	6, 7, 8, 9, 10
+// ]
+// 中序遍历： [
+// 	5, 3, 2, 4,  1,
+// 	6, 7, 8, 9, 10
+// ]
+// 后序遍历： [
+// 	5, 3, 4, 2, 10,
+// 	9, 8, 7, 6,  1
+// ]
+// 层序遍历： [
+// 	1, 2, 6, 3,  4,
+// 	7, 5, 8, 9, 10
+// ]

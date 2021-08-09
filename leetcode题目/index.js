@@ -75,7 +75,7 @@ function isValid(str) {
 function LRU(capacity) {
 	this.keyMap = new Map();
 	this.capacity = capacity;
-	LRU.prototype.get = function(key) {
+	LRU.prototype.get = function (key) {
 		if (this.keyMap.has(key)) {
 			const tempVal = this.keyMap.get(key);
 			this.keyMap.delete(key);
@@ -85,7 +85,7 @@ function LRU(capacity) {
 			return -1;
 		}
 	};
-	LRU.prototype.put = function(key, val) {
+	LRU.prototype.put = function (key, val) {
 		if (this.keyMap.has(key)) {
 			this.keyMap.delete(key);
 			this.keyMap.set(key, val);
@@ -171,43 +171,100 @@ function is4Num(n, base = 4) {
 // 滑窗算法
 // 输出一个字符串中最长不重复子串的长度
 function getSubstrMaxLengthofString(str) {
-	if (!str) return 0;
-	if (str === 1) return 1;
+	// if (!str) return 0;
+	// if (str === 1) return 1;
+	// const len = str.length;
+	// let l = 0;
+	// let r = 0;
+	// let maxLength = 0;
+	// let maxString = "";
+
+	// const map = new Map();
+	// for (let r = 0; r < len; r++) {
+	// 	const c = str[r];
+
+	// 	let tempStr = "";
+	// 	if (map.has(c) && map.get(c) >= l) {
+	// 		tempStr = str.substring(l, r);
+	// 		l = map.get(c) + 1;
+	// 	} else {
+	// 		tempStr = str.substring(l, r + 1);
+	// 	}
+	// 	maxString = tempStr.length > maxString.length ? tempStr : maxString;
+	// 	maxLength = Math.max(maxLength, r - l + 1);
+	// 	map.set(c, r);
+	// }
+	// return maxLength + "-" + maxString;
+
+	// 最优解？
 	const len = str.length;
-	let l = 0;
-	let r = 0;
-	let maxLength = 0;
-	let maxString = "";
+	if (len <= 1) return len;
 
 	const map = new Map();
-	for (let r = 0; r < len; r++) {
-		const c = str[r];
-		if (map.has(c) && map.get(c) >= l) {
-			l = map.get(c) + 1;
+	let maxLen = 0;
+	let left = 0;
+	let right = 0;
+	for (right = 0; right < len; right++) {
+		const c = str.charAt(right);
+		if (map.has(c) && map.get(c) >= left) {
+			left = map.get(c) + 1;
 		}
-		const tempStr = str.slice(l, r + 1);
-		// const tempStr = str.substr(l, r); 为什么结果不对？
-		maxString = tempStr.length >= maxString.length ? tempStr : maxString;
-		maxLength = Math.max(maxLength, r - l + 1);
-		map.set(c, r);
+		maxLen = Math.max(maxLen, right - left + 1);
+		map.set(c, right);
 	}
-	return maxLength + "-" + maxString;
+	return maxLen;
 }
 
-console.log(getSubstrMaxLengthofString("是一个子序列不是子串"));
-console.log(getSubstrMaxLengthofString("abcabcbb"));
+console.log(getSubstrMaxLengthofString("最长不重复子串的长度:", "是一个子序列不是子串"));
+console.log(getSubstrMaxLengthofString("最长不重复子串的长度:", "aba"));
 
-console.log(getSubstrMaxLengthofString("bbbbb"));
-console.log(getSubstrMaxLengthofString("pwwkew"));
-
+// console.log(getSubstrMaxLengthofString("bbbbb"));
+// console.log(getSubstrMaxLengthofString("pwwkew"));
 
 function reverseStr(str, num) {
 	// num <= length
-	var arr = str.split('')
+	var arr = str.split("");
 	while (num--) {
-		arr.push(arr.shift())
+		arr.push(arr.shift());
 	}
-	return arr.join('')
+	return arr.join("");
 }
 
-console.log(reverseStr('asfhdhfsd', 2));
+// console.log(reverseStr("asfhdhfsd", 2));
+
+function test(s1, s2) {
+	const len1 = s1.length;
+	const len2 = s2.length;
+	if (len1 === 0 || len2 === 0 || len1 < len2) return -1;
+	let codeSum2 = 0;
+	let set = new Set();
+	for (let c of s2) {
+		set.add(c);
+		codeSum2 += c.charCodeAt();
+	}
+
+	// console.log(233);
+	let l = 0;
+	let r = 0;
+	let codeSum1 = 0;
+
+	for (let r = 0; r < len1; r++) {
+		const c = s1.charAt(r);
+		if (set.has(c)) {
+			codeSum1 += c.charCodeAt();
+			if (r - l + 1 === len2) {
+				if (codeSum1 === codeSum2) {
+					return l;
+				} else {
+					codeSum1 -= s1.charAt(l).charCodeAt();
+					l += 1;
+				}
+			}
+		} else {
+			l = r;
+		}
+	}
+	return -1;
+}
+
+console.log("同源异构startIndex:", test("aeaabca", "abc"));

@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-06-11 09:48:58
- * @LastEditTime: 2021-06-18 18:32:48
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \Algorithm\leetcode题目\test.js
- */
 function sleep(time) {
 	var start = Date.now();
 	var sum = 0;
@@ -65,4 +57,34 @@ function fn(nums) {
 	}
 	return result;
 }
-console.log(fn([1, 2, 3]));
+// console.log(fn([1, 2, 3]));
+var count = function (arr, num) {
+	let n = 0;
+	arr.forEach(el => {
+		if (el === num) {
+			n += 1;
+		}
+	});
+	return n;
+};
+
+var intersect = function (nums1, nums2) {
+	if (nums1.length < 0 || nums2.length < 0) {
+		return [];
+	}
+
+	const result = [];
+
+	nums1.forEach(el => {
+		const min = Math.min(count(nums1, el), count(nums2, el));
+		const n = count(result, el);
+		n < min && nums2.includes(el) && result.push(el);
+	});
+	return result;
+};
+
+console.log(
+	intersect([1, 2], [1, 1]),
+	intersect([1, 2, 2, 1], [2, 2]),
+	intersect([4, 9, 5], [9, 4, 9, 8, 4])
+);
