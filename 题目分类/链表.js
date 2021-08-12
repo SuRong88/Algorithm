@@ -457,3 +457,71 @@ var mergeKLists = function (lists) {
 	}
 	return l3.next;
 };
+
+// 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+// 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+
+var swapPairs = function (head) {
+	// if(head === null || head.next === null) { return head }
+	// let curr = head
+	// while(curr && curr.next) {
+	//     const temp= curr.val
+	//     curr.val = curr.next.val
+	//     curr.next.val = temp
+	//     curr = curr.next.next
+	// }
+	// return head
+	if (head === null || head.next === null) {
+		return head;
+	}
+	const dummy = new ListNode();
+	dummy.next = head;
+	let prev = dummy;
+	let curr = head;
+	while (curr && curr.next) {
+		const temp = curr.next.next;
+		curr.next.next = curr;
+		prev.next = curr.next;
+		curr.next = temp;
+		prev = curr;
+		curr = temp;
+	}
+	return dummy.next;
+};
+
+// 给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。
+// k 是一个正整数，它的值小于或等于链表的长度。
+// 如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。
+
+var reverseKGroup = function (head, k) {
+	if (head === null || head.next === null || k === 1) {
+		return head;
+	}
+	const dummy = new ListNode();
+	dummy.next = head;
+	let prev = dummy;
+	let start = head;
+	let finish = false;
+	while (!finish) {
+		let currHead = start;
+		let currTail = start;
+		let count = k - 1;
+		while (count-- && currTail) {
+			currTail = currTail.next;
+		}
+		if (count > 0 || currTail === null) {
+			finish = true;
+		} else {
+			const temp = currTail.next;
+			currTail.next = null; //截断
+			prev.next = revertLinkedList(currHead);
+			currHead.next = temp;
+			prev = currHead;
+			start = temp;
+			if (temp === null) {
+				finish = true;
+			}
+		}
+	}
+	return dummy.next;
+};
