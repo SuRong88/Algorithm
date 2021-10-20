@@ -100,7 +100,7 @@ function mergeSort(arr) {
 function shellSort() {}
 
 // arr = [49, 48, 37, 36, 35, 26, 24, 17, 12, 8];
-// console.log(mergeSort(arr));
+// console.log(insertionSort(arr));
 
 // 总结：
 // 归并排序 和 快速排序 都是“分而治之”思想的体现

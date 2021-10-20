@@ -81,3 +81,69 @@ function getTheLostNum(n, arr) {
 }
 console.log(getTheLostNum(3, [1, 3]));
 console.log(getTheLostNum(7, [1, 2, 3, 5, 6, 7]));
+
+// 题目如下：
+
+// 扁平化对象
+function isObject(value) {
+	return typeof value === "object" && value !== null;
+}
+function flatObj(obj) {
+	if (!isObject(obj)) {
+		return;
+	}
+	const res = {};
+	function dfs(curr, prefix) {
+		if (isObject(curr)) {
+			if (Array.isArray(curr)) {
+				for (let index in curr) {
+					dfs(curr[index], `${prefix}[${index}]`);
+				}
+			} else {
+				for (let k in curr) {
+					dfs(curr[k], prefix ? `${prefix}.${k}` : k);
+				}
+			}
+		} else {
+			res[prefix] = curr;
+		}
+	}
+	dfs(obj, "");
+	return res;
+}
+const obj = {
+	a: {
+		b: 1,
+		c: 2,
+		d: { e: 5 }
+	},
+	b: [1, 3, { a: 2, b: 3 }],
+	c: 3
+};
+
+console.log(flatObj(obj));
+
+// 题目如下：
+
+// 求数组的公共前缀
+function longestCommonPrefix(strs) {
+	if (strs.length === 0) return "";
+	if (strs.length === 1) return strs[0];
+	const str = strs[0];
+	let index = 0;
+	while (index < str.length) {
+		const strCurr = str.slice(0, index + 1);
+		for (let i = 0; i < strs.length; i++) {
+			// !strs[i] || !strs[i].startsWith(strCurr)的判断有必要吗
+			// 感觉!strs[i].startsWith(strCurr)就可以了
+			if (!strs[i] || !strs[i].startsWith(strCurr)) {
+				return str.slice(0, index);
+			}
+		}
+		index++;
+	}
+	return str;
+}
+
+const strs = ["f lower", "flow", "flight"];
+console.log("字符串数组公共前缀", longestCommonPrefix(strs));
