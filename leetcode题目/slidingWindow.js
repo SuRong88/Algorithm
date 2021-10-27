@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-06-09 10:30:29
- * @LastEditTime: 2021-06-09 11:39:38
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \菜鸟学算法\leetcode题目\slidingWindow.js
- */
 function getMaxUnrepeatSubstr(str) {
 	let left = 0;
 	// let right = 0;

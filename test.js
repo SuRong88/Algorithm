@@ -47,6 +47,7 @@ function flatObj(source) {
 }
 
 const obj = {
+	date: new Date(),
 	arr: [
 		{
 			a: 1,
@@ -83,3 +84,64 @@ function deepClone(source) {
 const copyObj = deepClone(obj);
 obj.key = "jc";
 console.log(obj, copyObj);
+
+function randomUnrepeatNums(n, m, count) {
+	if (count > m - n + 1) {
+		throw new Error("参数不合法");
+	}
+
+	const arr = [];
+	const set = new Set();
+	while (arr.length < count) {
+		const num = Math.floor(Math.random() * (m - n + 1) + n);
+		set.has(num) || (arr.push(num), set.add(num));
+	}
+	return arr.sort((a, b) => a - b);
+}
+
+console.log(randomUnrepeatNums(10, 200, 100));
+
+function deepClone(source) {
+	if (!isObject(source)) return source;
+
+	function rec(val) {
+		if (!isObject(val)) {
+			return val;
+		} else {
+			const res = Array.isArray(val) ? [] : {};
+			for (let k in val) {
+				res[k] = rec(val[k]);
+			}
+			return res;
+		}
+	}
+
+	return rec(source);
+}
+
+function fn(arr) {
+	if (arr.length === 0) return "";
+	if (arr.length === 1) return arr[0];
+
+	const str = arr[0];
+	let index = 0;
+	while (index < str.length) {
+		const strSub = str.slice(0, index + 1);
+		// for (let i = 1; i < arr.length; i++) {
+		// 	if (!arr[i].startsWith(strSub)) {
+		// 		return str.slice(0, index);
+		// 	}
+		// }
+		for (let curr of arr) {
+			if (!curr.startsWith(strSub)) {
+				return str.slice(0, index);
+			}
+		}
+		index++;
+	}
+
+	return str;
+}
+
+const strs = ["flower", "", "flow", "floight"];
+console.log("字符串数组公共前缀", fn(strs));

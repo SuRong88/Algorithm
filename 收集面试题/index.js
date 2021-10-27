@@ -133,7 +133,7 @@ function longestCommonPrefix(strs) {
 	let index = 0;
 	while (index < str.length) {
 		const strCurr = str.slice(0, index + 1);
-		for (let i = 0; i < strs.length; i++) {
+		for (let i = 1; i < strs.length; i++) {
 			// !strs[i] || !strs[i].startsWith(strCurr)的判断有必要吗
 			// 感觉!strs[i].startsWith(strCurr)就可以了
 			if (!strs[i] || !strs[i].startsWith(strCurr)) {
@@ -145,5 +145,5 @@ function longestCommonPrefix(strs) {
 	return str;
 }
 
-const strs = ["f lower", "flow", "flight"];
+const strs = ["flower", "flow", "floight"];
 console.log("字符串数组公共前缀", longestCommonPrefix(strs));

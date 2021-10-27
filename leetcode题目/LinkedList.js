@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-06-07 16:13:54
- * @LastEditTime: 2021-06-07 16:43:27
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \菜鸟学算法\leetcode题目\链表.js
- */
 const a = {
 	val: "a"
 };

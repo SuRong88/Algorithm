@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-06-11 16:04:32
- * @LastEditTime: 2021-06-11 16:04:53
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \Algorithm\leetcode题目\getSumIndex.js
- */
 function getIndexs(array, n) {
 	const res = [];
 	const len = array.length;
