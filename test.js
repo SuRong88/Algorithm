@@ -119,7 +119,7 @@ function deepClone(source) {
 	return rec(source);
 }
 
-function fn(arr) {
+function longestCommonPrefix(arr) {
 	if (arr.length === 0) return "";
 	if (arr.length === 1) return arr[0];
 
@@ -144,4 +144,60 @@ function fn(arr) {
 }
 
 const strs = ["flower", "", "flow", "floight"];
-console.log("字符串数组公共前缀", fn(strs));
+console.log("字符串数组公共前缀", longestCommonPrefix(strs));
+
+function flatData(data) {
+	const res = [];
+	function rec(arr) {
+		if (arr.length === 0) return;
+		arr.forEach(el => {
+			res.push({
+				id: el.id,
+				name: el.name,
+				pid: el.pid
+			});
+			el.children.length && rec(el.children);
+		});
+	}
+	rec(data);
+	return res;
+
+	// const res = [];
+	// const stack = data;
+	// while (stack.length) {
+	// 	const curr = stack.shift();
+	// 	res.push({
+	// 		id: curr.id,
+	// 		name: curr.name,
+	// 		pid: curr.pid
+	// 	});
+	// 	curr.children.length && stack.unshift(...curr.children);
+	// }
+	// return res;
+}
+
+const data = [
+	{
+		id: 1,
+		name: "部门1",
+		pid: 0,
+		children: [
+			{
+				id: 2,
+				name: "部门2",
+				pid: 1,
+				children: []
+			},
+			{
+				id: 3,
+				name: "部门3",
+				pid: 1,
+				children: []
+			}
+		]
+	}
+];
+
+console.time("check");
+console.log(flatData(data));
+console.timeEnd("check");
